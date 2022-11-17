@@ -10,8 +10,8 @@ import BlockButton from "./../../../_focusAble/_formUi/_rippleButton/_blockButto
 
 
 
-class WelcomePage extends Page {
-  defaultDomain = "welcome"
+class LoginPage extends Page {
+  defaultDomain = "login"
 
   constructor() {
     super();
@@ -27,12 +27,12 @@ class WelcomePage extends Page {
 
 
   stl() {
-    return super.stl() + require("./welcome.css").toString()
+    return super.stl() + require("./loginPage.css").toString()
   }
   pug() {
-    return require("./welcome.pug").default
+    return require("./loginPage.pug").default
   }
 
 }
 
-export default declareComponent("welcome-page", WelcomePage)
+export default declareComponent("login-page", LoginPage)
