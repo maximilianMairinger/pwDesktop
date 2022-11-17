@@ -5,7 +5,8 @@ import type * as API from "./api"
 type E = {[key in keyof typeof API]: any}
 
 const funcNames: E = {
-    checkPassword: ""
+    encryptFile: "",
+    decryptFile: ""
 }
 
 

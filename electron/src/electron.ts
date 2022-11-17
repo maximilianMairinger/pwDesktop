@@ -20,9 +20,10 @@ const loadURL = serve({directory: path.resolve('public')});
   win.webContents.openDevTools()
 
 
+  
   for (const key in api) {
     ipcMain.handle(key, (event, a) => {
-      return api[key](JSON.parse(a))
+      return api[key](...JSON.parse(a))
     })
   }
 
