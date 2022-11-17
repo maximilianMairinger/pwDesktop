@@ -4,7 +4,7 @@ import FormUi from "../formUi";
 
 type ReadonlyData<T> = Omit<Data<T>, "set">
 
-export default class EditAble extends FormUi {
+export default class EditAble<InputElem extends HTMLInputElement | HTMLTextAreaElement = HTMLInputElement | HTMLTextAreaElement> extends FormUi {
 
   
   public isEmpty: ReadonlyData<boolean>
@@ -15,36 +15,40 @@ export default class EditAble extends FormUi {
   protected placeholderText = ce("placeholder-text")
 
   protected placeholderUp: Data<boolean>
-  constructor(public inputElem: HTMLInputElement | HTMLTextAreaElement, placeholder = "") {
+  constructor(protected inputElem: InputElem, placeholder = "") {
     super()
     inputElem.id = "editAble"
     this.moveBody.apd(this.placeholderContainer.apd(this.placeholderText))
-    this.moveBody.apd(inputElem as any)
-    
+    this.moveBody.apd(inputElem as any);
 
     this.userFeedbackMode.ripple.set(false)
 
     this.placeholder(placeholder)
 
-    this.enabled.get((enabled) => {
-      if (enabled) {
-        this.inputElem.tabIndex = 0
+
+    const clickListener = this.on("click", () => {
+      inputElem.focus()
+    })
+
+    const placeholderMoveEnabled = new Data(true)
+
+    new DataCollection(this.enabled, placeholderMoveEnabled).get((enabled, placeholderEnabled) => {
+      if (enabled && placeholderEnabled) {
         clickListener.activate()
-      }
-      else {
-        this.inputElem.tabIndex = -1
+        this.inputElem.tabIndex = 0
+        this.inputElem.css({pointerEvents: "all"} as any)
+      } else {
         clickListener.deactivate()
+        this.inputElem.tabIndex = -1
+        this.inputElem.css({pointerEvents: "none"} as any)
       }
     }, false)
 
-    
 
     
-    const value = (this as any).value = new Data(this.inputElem.value)
-    this.inputElem.on("input", () => {(this.value as Data<string>).set(this.inputElem.value)})
-    value.get((v) => {
-      this.inputElem.value = v
-    }, false)
+    const value = (this as any).value = new Data(undefined, "")
+    const setValueSub = value.get((val) => {this.inputElem.value = val})
+    this.inputElem.on("input", () => {setValueSub.setToData(this.inputElem.value)})
     const isEmpty = (this as any).isEmpty = value.tunnel((v) => v === "")
 
     this.placeholderUp = new Data(false) as any
@@ -57,8 +61,8 @@ export default class EditAble extends FormUi {
 
 
     let globalAnimDone: Symbol
-    this.placeholderUp.get((up) => {
-      
+    new DataCollection(this.placeholderUp, placeholderMoveEnabled).get((up, enabled) => {
+      if (!enabled) return
 
       let localAnimDone = globalAnimDone = Symbol()
       this.componentBody.removeClass("animDone")
@@ -71,21 +75,6 @@ export default class EditAble extends FormUi {
       this.placeholderText.css({fontWeight: isEmpty ? "normal" : "bold"})
     })
 
-    const clickListener = this.on("click", () => {
-      inputElem.focus()
-    })
-  }
-  select() {
-    this.inputElem.select()
-  }
-  disable() {
-    this.enabled.set(false)
-  }
-  enable() {
-    this.enabled.set(true)
-  }
-  clear() {
-    this.value.set("")
   }
   focus() {
     this.inputElem.focus()
@@ -101,4 +90,3 @@ export default class EditAble extends FormUi {
   }
   
 }
-

@@ -6,7 +6,6 @@ export default class Input extends EditAble {
   constructor(placeholder?: string) {
     super(ce("input"), placeholder)
 
-
     this.placeholderContainer.prepend(ce("left-gradient"), ce("right-gradient"))
 
     
@@ -23,6 +22,9 @@ export default class Input extends EditAble {
       })
     })
     
+  }
+  type(type: string) {
+    (this.inputElem as HTMLInputElement).type = type
   }
   public pug(): string {
     return super.pug() + require("./input.pug").default

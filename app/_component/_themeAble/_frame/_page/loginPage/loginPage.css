@@ -12,7 +12,7 @@ main-content {
   box-sizing: border-box;
 }
 
-form-container {
+c-form {
   width: 100%;
   display: flex;
 }
@@ -23,7 +23,7 @@ c-block-button {
 }
 
 
-form-container > c-input {
+c-form > c-input {
   flex: 1;
   margin-right: 12px;
 }

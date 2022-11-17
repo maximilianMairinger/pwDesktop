@@ -3,26 +3,27 @@ import Page from "../page"
 import "./../../../_focusAble/_formUi/_editAble/input/input"
 import Input from "./../../../_focusAble/_formUi/_editAble/input/input"
 import "./../../../_focusAble/_formUi/_rippleButton/_blockButton/blockButton"
+import Button from "./../../../_focusAble/_formUi/_rippleButton/_blockButton/blockButton"
 import "./../../../textBlob/textBlob"
 import "./../../../../form/form"
-import store, { doubleLink } from "./../../../../../lib/db"
-import BlockButton from "./../../../_focusAble/_formUi/_rippleButton/_blockButton/blockButton"
+import Form from "./../../../../form/form"
+import { send } from "../../../../../lib/com"
 
 
 
 class LoginPage extends Page {
   defaultDomain = "login"
 
+  private form = this.body.form as Form
+  private btn = this.body.btn as Button
   constructor() {
     super();
 
-    doubleLink(store.username, (this.body.username as Input).value);
+    this.form.submitElement(this.btn)
 
-
-    (this.body.username as Input).isEmpty.get((v) => {
-      (this.body.btn as BlockButton).enabled.set(!v)
+    this.form.submit(async ({ password }) => {
+      console.log("getting back", await send("checkPassword", password))
     })
-    
   }
 
 

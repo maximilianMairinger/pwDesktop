@@ -19,3 +19,20 @@ export default {
     json()
   ]
 };
+
+export const preLoad = {
+  input: 'electron/src/preload.ts',
+  output: {
+    file: 'electron/dist/preload.js',
+    format: 'cjs'
+  },
+  plugins: [
+    typescript({tsconfig: "./tsconfig.electron.json", noEmitOnError: false}), 
+    resolve({modulesOnly: true, preferBuiltins: true}),
+    commonJS({
+      include: 'node_modules/**'
+    }),
+    json()
+  ]
+};
+
