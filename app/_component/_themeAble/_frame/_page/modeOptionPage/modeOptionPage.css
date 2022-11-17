@@ -1,0 +1,63 @@
+
+component-body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.panel {
+  max-width: 100%;
+  min-height: 100%;
+  padding: min(50px, 3%);
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: absolute;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+settings-panel {
+  width: 470px;
+}
+
+c-load-button {
+  margin-left: 10px;
+  --background: var(--primary-theme);
+  --text: var(--plain-background);
+}
+
+c-input {
+  flex: 1;
+}
+
+c-text-blob {
+  width: 100%;
+}
+
+c-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  position: relative;
+}
+
+countdown-figure {
+  font-size: 55px;
+  font-weight: bold;
+  position: absolute;
+  display: block;
+  opacity: 0;
+  user-select: none;
+  top: 20px;
+}

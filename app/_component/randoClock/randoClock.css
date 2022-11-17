@@ -1,0 +1,103 @@
+:host {
+  width: 100px;
+  height: 100px;
+  display: block;
+  user-select: none;
+}
+
+component-body {
+  width: 100px;
+  height: 100px;
+  border: 1px solid;
+  box-sizing: border-box;
+}
+
+component-body.white {
+  background: white;
+  color: black;
+  border-color: black;
+}
+
+component-body.black {
+  background: black;
+  color: white;
+  border-color: white;
+}
+
+component-body.round {
+  border-radius: 50%;
+}
+
+component-body.square {
+  border-radius: 0;
+}
+
+indecator-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+some-indecator {
+  position: absolute;
+  display: block;
+  padding-left: calc(100% - 22px);
+}
+
+
+
+
+some-indecator > * {
+  display: block;
+}
+
+small-indecator {
+  width: 8px;
+  height: 3px;
+}
+
+some-indecator.long {
+  padding-left: calc(100% + 2px);
+}
+
+some-indecator.long small-indecator {
+  width: calc(8px + 7px);
+}
+
+some-indecator.long:has(number-indecator) {
+  padding-left: calc(100% + 9px);
+}
+
+
+component-body.black small-indecator, component-body.black index-center, component-body.black index-pointer {
+  background: white;
+}
+
+component-body.white small-indecator, component-body.white index-center, component-body.white index-pointer {
+  background: black;
+}
+
+index-center {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  display: block;
+  position: absolute;
+}
+
+
+index-pointer {
+  width: 4px;
+  height: 23px;
+  margin-bottom: 23px;
+  display: block;
+  position: absolute;
+  transform-origin: bottom;
+}
+
+index-pointer-container {
+  position: absolute;
+  display: block;
+}

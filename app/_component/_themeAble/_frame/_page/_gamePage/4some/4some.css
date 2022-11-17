@@ -1,0 +1,29 @@
+elem-container {
+  position: relative;
+  float: left;
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+c-rando-clock {
+  margin: 5px;
+}
+
+
+c-input {
+  display: none;
+  width: 75px;
+  position: absolute;
+}
+/* 
+game-content {
+  
+} */
+
+
+game-content {
+  width: 330px;
+}
