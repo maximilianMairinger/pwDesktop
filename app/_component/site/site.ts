@@ -60,11 +60,13 @@ export default class Site extends Component {
     
     let currentSection: string
 
-    const pageIconIndex = {
-      single: new ThoughtBubbleIcon(),
-      "4some": new TeamIcon(),
-      full: new RocketIcon()
-    }
+    // const pageIconIndex = {
+    //   single: new ThoughtBubbleIcon(),
+    //   "4some": new TeamIcon(),
+    //   full: new RocketIcon()
+    // }
+
+    const pageIconIndex = {}
 
     let pageManager = new PageManager((page, sections, domainLevel) => {
       let section = page
@@ -87,6 +89,7 @@ export default class Site extends Component {
     });
 
     lowerNav.updatePage(pageIconIndex, 0)
+    lowerNav.hide()
     header.updatePage(Object.keys(pageIconIndex), 0)
     
 

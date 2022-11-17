@@ -11,8 +11,15 @@ if ((window as any).electronAPI === undefined) {
     get: (target, prop) => {
       return (args) => {
         console.log("dummy call:", prop, JSON.parse(args))
+        return dummyFunc[prop] !== undefined ? dummyFunc[prop](JSON.parse(args)) : undefined
       }
     }
   })
 }
 
+
+const dummyFunc = {
+  checkPassword: (a) => {
+    return true
+  }
+}

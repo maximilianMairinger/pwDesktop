@@ -41,7 +41,7 @@ const pathDisplayHeaderMinMargin = 70
 
 
 export default class Header extends ThemeAble {
-  private pathDisplayElem = this.q("c-input")
+  private pathDisplayElem = this.q("path-display")
   private linkContainerElem = this.q("right-content")
   private leftContent = this.q("left-content")
   private underlineElem = new SlidyUnderline
@@ -74,12 +74,7 @@ export default class Header extends ThemeAble {
     super()
     this.linkContainerElem.apd(this.underlineElem);
 
-    const elSub = (this.body.username as Input).value.get((v) => {
-      storeSub.setToData(v)
-    }, false)
-    const storeSub = store.username.get((v) => {
-      elSub.setToData(v)
-    })
+
 
     this.atTheTop.get((top) => {
       if (top) {

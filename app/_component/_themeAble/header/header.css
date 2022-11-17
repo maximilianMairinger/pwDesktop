@@ -192,19 +192,6 @@ additional-path-display {
   transform: translateY(-5px) scale(.95);
 }
 
-additional-path-display > * {
-  position: relative;
-  float: left;
-  display: block;
-  height: auto;
-  width: 35px;
-  height: 35px;
-  margin: 0 5px;
-
-  display: none;
-  opacity: 0;
-  transform: translateX(-3px)
-}
 
 
 split-line {
