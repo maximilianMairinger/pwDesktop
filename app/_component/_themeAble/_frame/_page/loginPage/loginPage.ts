@@ -22,7 +22,9 @@ class LoginPage extends Page {
     this.form.submitElement(this.btn)
 
     this.form.submit(async ({ password }) => {
-      console.log("getting back", await com.decryptFile("/Users/maximilianmairinger/Desktop/sol.png.enc", password))
+      
+      // console.log("getting back", await com.decryptFile("/Users/maximilianmairinger/Desktop/sol.png.enc", password))
+      console.log("test")
     })
   }
 

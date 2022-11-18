@@ -5,6 +5,7 @@ import HighlightAbleIcon from "../../../_icon/_highlightAbleIcon/highlightAbleIc
 
 import NotFoundPage from "../../_page/notFound/notFound"
 import LoginPage from "../../_page/loginPage/loginPage"
+import UploadPage from "../../_page/uploadPage/uploadPage"
 
 
 export default class PageManager extends Manager {
@@ -15,6 +16,11 @@ export default class PageManager extends Manager {
         key: new Import("", 10, (login: typeof LoginPage) =>
             new login()
         ), val: () => import(/* webpackChunkName: "loginMode" */"../../_page/loginPage/loginPage")
+      },
+      {
+        key: new Import("upload", 10, (upload: typeof UploadPage) =>
+            new upload()
+        ), val: () => import(/* webpackChunkName: "uploadMode" */"../../_page/uploadPage/uploadPage")
       },
       {
         key: new Import("", 60, (notFoundPage: typeof NotFoundPage) =>

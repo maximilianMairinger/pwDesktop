@@ -23,9 +23,14 @@ const loadURL = serve({directory: path.resolve('public')});
   
   for (const key in api) {
     ipcMain.handle(key, (event, a) => {
-      return api[key](...JSON.parse(a))
+      return api[key](...a)
     })
   }
 
 	await loadURL(win);
+
+
+  console.log()
+  console.log()
+  console.log()
 })();
