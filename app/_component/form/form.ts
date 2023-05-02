@@ -62,7 +62,7 @@ export default class Form extends Component<false> {
         
       })
       this.unsubFromLastSubmitElement = () => {
-        (submitElement as Button).removeActivationCallback(cb)
+        (submitElement as Button).removeActivationCallback(cb as any)
       }
     })
     

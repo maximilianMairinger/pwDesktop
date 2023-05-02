@@ -13,12 +13,12 @@ export default class PageManager extends Manager {
 
     super(new ImportanceMap<() => Promise<any>, any>(
       {
-        key: new Import("", 10, (login: typeof LoginPage) =>
+        key: new Import("login", 10, (login: typeof LoginPage) =>
             new login()
         ), val: () => import(/* webpackChunkName: "loginMode" */"../../_page/loginPage/loginPage")
       },
       {
-        key: new Import("upload", 10, (upload: typeof UploadPage) =>
+        key: new Import("", 10, (upload: typeof UploadPage) =>
             new upload()
         ), val: () => import(/* webpackChunkName: "uploadMode" */"../../_page/uploadPage/uploadPage")
       },

@@ -6,6 +6,7 @@ import Button from "./../../_themeAble/_focusAble/_button/button"
 import HighlightAbleIcon from "../_icon/_highlightAbleIcon/highlightAbleIcon"
 import lang from "./../../../lib/lang"
 import { Data } from "josm"
+import { Token } from "fast-linked-list"
 
 
 const hightlightClassString = "highlight"
@@ -32,12 +33,12 @@ export default class LowerNavLink extends ThemeAble {
     this.link(link, domainLevel)
   }
 
-  public addActivationCallback<CB extends (e?: MouseEvent | KeyboardEvent) => void>(cb: CB): CB {
+  public addActivationCallback<CB extends (e: MouseEvent | KeyboardEvent | undefined) => void>(cb: CB): Token<CB> {
     return this.buttonElem.addActivationCallback(cb)
   }
 
-  public removeActivationCallback<CB extends (e?: MouseEvent | KeyboardEvent) => void>(cb: CB): CB {
-    return this.buttonElem.removeActivationCallback(cb)
+  public removeActivationCallback<CB extends (e: MouseEvent | KeyboardEvent | undefined) => void>(cb: CB): Token<CB> {
+    return this.buttonElem.removeActivationCallback(cb as any)
   }
 
 

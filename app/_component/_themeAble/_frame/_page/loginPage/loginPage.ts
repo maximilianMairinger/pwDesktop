@@ -12,7 +12,6 @@ import { com } from "../../../../../lib/com"
 
 
 class LoginPage extends Page {
-  defaultDomain = "login"
 
   private form = this.body.form as Form
   private btn = this.body.btn as Button

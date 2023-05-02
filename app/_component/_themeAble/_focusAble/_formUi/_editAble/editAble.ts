@@ -76,6 +76,9 @@ export default class EditAble<InputElem extends HTMLInputElement | HTMLTextAreaE
     })
 
   }
+  clear() {
+    this.value.set("")
+  }
   focus() {
     this.inputElem.focus()
   }

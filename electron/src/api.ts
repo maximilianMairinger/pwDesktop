@@ -45,9 +45,10 @@ export async function decryptFile(_encryptedFile: Buffer | ArrayBuffer, password
 }
 
 
-export async function selectFile(): Promise<File | FileSystemFileHandle> {
+export async function selectFile(ext: keyof typeof extIndex = "all") {
   const result = await dialog.showOpenDialog({
-    properties: ['openFile']
+    properties: ['openFile'],
+    filters: [extIndex[ext]]
   })
   return result.filePaths[0]
 }
@@ -63,21 +64,22 @@ const extIndex = {
   }
 }
 
-export type File = string | FileSystemFileHandle
 
-export async function selectNewFile(suggestedName: string, ext: keyof typeof extIndex = "all") {
+
+export async function selectNewFile(suggestedPath: string, ext: keyof typeof extIndex = "all") {
   const result = await dialog.showSaveDialog({
     filters: [extIndex[ext]],
-    defaultPath: suggestedName
+    defaultPath: suggestedPath,
+
   })
-  return result.filePath as File
+  return result.filePath
 }
 
-export async function writeFile(name: File, content: Buffer | ArrayBuffer) {
+export async function writeFile(name: string, content: Buffer) {
   await fs.writeFile(name as string, content as Buffer)
 }
 
-export async function readFile(name: File) {
-  return await fs.readFile(name as string) as Buffer | ArrayBuffer
+export async function readFile(name: string) {
+  return await fs.readFile(name as string) as Buffer
 }
 

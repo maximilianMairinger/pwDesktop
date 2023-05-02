@@ -64,9 +64,7 @@ blurry-background.blurry {
   opacity: 0;
 }
 
-.logo {
-  transition: .25s;
-}
+
 
 c-rando-clock {
   transform: scale(.4);

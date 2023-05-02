@@ -5,12 +5,12 @@ import { PrimElem, Token, VariableLibrary } from "extended-dom";
 import Component from "../../../component";
 import { Data } from "josm";
 import { linkRecord } from "../../link/link";
-
+import LinkedList, {Token as TToken} from "fast-linked-list"
 
 
 
 export default class Button extends FocusAble<HTMLAnchorElement> {
-  private callbacks: ((e: MouseEvent | KeyboardEvent) => void)[] = [];
+  private callbacks: LinkedList<(e: MouseEvent | KeyboardEvent) => void> = new LinkedList();
   public preventOnClickFocus = false
 
   private preferedTabIndex: number = 0
@@ -131,19 +131,18 @@ export default class Button extends FocusAble<HTMLAnchorElement> {
     else return this._link
   }
 
-  public addActivationCallback<CB extends (e: MouseEvent | KeyboardEvent | undefined) => void>(cb: CB): CB {
-    this.callbacks.add(cb);
+  public addActivationCallback<CB extends (e: MouseEvent | KeyboardEvent | undefined) => void>(cb: CB): TToken<CB> {
     this.enabled.set(true)
-    return cb
+    return this.callbacks.push(cb) as any;
   }
-  public removeActivationCallback<CB extends (e: MouseEvent | KeyboardEvent | undefined) => void>(cb: CB): CB {
-    this.callbacks.removeV(cb);
+  public removeActivationCallback<CB extends (e: MouseEvent | KeyboardEvent | undefined) => void>(cb: TToken<CB>): TToken<CB> {
+    cb.rm()
     if (this.callbacks.empty) this.enabled.set(false)
     return cb
   }
 
   
-  public click<CB extends (e?: MouseEvent | KeyboardEvent) => void>(f: CB): CB
+  public click<CB extends (e?: MouseEvent | KeyboardEvent) => void>(f: CB): TToken<CB>
   public click(e?: MouseEvent | KeyboardEvent): Promise<any[]>
   public click(e_f?: MouseEvent | KeyboardEvent | ((e?: MouseEvent | KeyboardEvent) => void)) {
     if (e_f instanceof Function) {

@@ -2,6 +2,7 @@ import declareComponent from "../../../../../lib/declareComponent";
 import FormUi from "../formUi";
 import Button from "../../_button/button"
 import { PrimElem, Token, VariableLibrary } from "extended-dom";
+import { Token as TToken } from "fast-linked-list"
 
 
 
@@ -61,7 +62,7 @@ export default class UiButton extends FormUi<Button> {
   public link: ((() => string) & ((to: null) => this) & ((to: string, domainLevel?: number, push?: boolean, notify?: boolean) => this))
   public addActivationCallback?<CB extends (e: MouseEvent | KeyboardEvent | undefined) => void>(cb: CB): CB
   public removeActivationCallback?<CB extends (e: MouseEvent | KeyboardEvent | undefined) => void>(cb: CB): CB
-  public click?<CB extends (e?: MouseEvent | KeyboardEvent) => void>(f: CB): CB
+  public click?<CB extends (e?: MouseEvent | KeyboardEvent) => void>(f: CB): TToken<CB>
   public click?(e?: MouseEvent | KeyboardEvent): Promise<any[]>
   public hotkey?(key: string): void
 

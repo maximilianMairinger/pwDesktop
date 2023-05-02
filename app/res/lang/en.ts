@@ -2,6 +2,7 @@ export default {
   xcenic: {
     longName: "Xcenic"
   },
+  confirm: "Confirm",
   copiedFeedback: "Copied to clipboard",
   links: {
     single: "Single Pringle",

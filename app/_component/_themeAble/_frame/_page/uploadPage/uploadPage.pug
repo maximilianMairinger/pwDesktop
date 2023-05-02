@@ -1,2 +1,5 @@
-input(type="file" name="upload")
-c-block-button(content="select file" name="btn")
+main-content
+  c-text-blob(heading="What now?" note="Tell us" text="Please select one of the options below to encrypt your file, or decrypt an existing one. To temporarly decrypt you can doubleclick on the encrypted file on your filesystem.")
+  c-form(name="form")
+    c-block-button(content="Decrypt" name="decryptBtn")
+    c-block-button(content="Encrypt" name="encryptBtn")

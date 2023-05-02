@@ -6,7 +6,11 @@ type E = {[key in keyof typeof API]: any}
 
 const funcNames: E = {
     encryptFile: "",
-    decryptFile: ""
+    decryptFile: "",
+    readFile: "",
+    writeFile: "",
+    selectFile: "",
+    selectNewFile: "",
 }
 
 

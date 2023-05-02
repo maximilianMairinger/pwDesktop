@@ -8,23 +8,19 @@ import "./../../../textBlob/textBlob"
 import "./../../../../form/form"
 import Form from "./../../../../form/form"
 import { com } from "../../../../../lib/com"
-import type { File } from "../../../../../../electron/src/api"
-import path from "path"
+import * as domain from "./../../../../../lib/domain"
+import type Path from "path"
+import _path from "path-browserify"
+const path = _path as unknown as typeof Path
+import Popup, { popup } from "../../../popup/uiPopup/uiPopup"
 
-function extractNameFromFile(file: File) {
-  if (file instanceof FileSystemFileHandle) {
-    return file.name
-  }
-  else if (typeof file === "string") {
-    return path.basename(file)
-  }
-}
 
+console.log(new Popup())
 
 class UploadPage extends Page {
 
-  private uploadElem = this.body.upload as Input
-  private btnElem = this.body.btn as Button
+  private encBtn = this.body.encryptBtn as Button
+  private decBtn = this.body.decryptBtn as Button
   constructor() {
     super();
 
@@ -33,22 +29,46 @@ class UploadPage extends Page {
     //   console.log(this.uploadElem.value)
     // })
 
-    this.btnElem.on("click", async () => {
-      const file = await com.selectFile()
+
+    
+    
+
+    this.encBtn.click(async () => {
+
+
+      const pop = popup("test", "test")
+      // const file = await com.selectFile()
+      // console.log(file)
+      // const content = await com.readFile(file)
+      // console.log(content)
+
+      // const encrypted = await com.encryptFile(content, "test123")
+      
+      // console.log(encrypted)
+
+      // const p = path.parse(file)
+
+      // const newFile = await com.selectNewFile(`${extractNameFromFile(file)}.enc`)
+      // console.log(newFile)
+
+      // com.writeFile(newFile, encrypted)
+    })
+
+    this.decBtn.click(async () => {
+      const file = await com.selectFile("enc")
       console.log(file)
       const content = await com.readFile(file)
       console.log(content)
 
-      const encrypted = await com.encryptFile(content, "test123")
-      console.log(encrypted)
+      const decr = await com.decryptFile(content, "test123")
+      console.log(decr)
 
-      const newFile = await com.selectNewFile(`${extractNameFromFile(file)}.enc`)
-      console.log(newFile)
+      // const newFile = await com.selectNewFile(`${extractNameFromFile(file)}.decrypted`)
+      // console.log(newFile)
 
       
 
-      com.writeFile(newFile, encrypted)
-
+      // com.writeFile(newFile, decr)
     })
 
   }

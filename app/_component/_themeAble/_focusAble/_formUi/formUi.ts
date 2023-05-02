@@ -9,7 +9,7 @@ import { Theme } from "../../themeAble"
 if (window.TouchEvent === undefined) window.TouchEvent = class SurelyNotTouchEvent {} as any
 
 
-type ReadonlyData<T> = Omit<Data<T>, "set">
+export type ReadonlyData<T> = Omit<Data<T>, "set">
 
 // distance between two points
 function distance(p1: [number, number], p2: [number, number]) {

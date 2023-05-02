@@ -15,15 +15,32 @@ function send(call: keyof typeof API, ...payload: any) {
 if ((window as any).electronAPI === undefined) {
   console.log("Not running in electron");
 
-  const localCom = import("./localCom");
-
   (window as any).electronAPI = new Proxy({}, {
     get: (target, prop) => {
-      return async (args) => {
-        return await (await localCom)[prop](...args)
+      return (args) => {
+        console.log("dummy call:", prop, args)
+        return webFunc[prop] !== undefined ? webFunc[prop](...args) : undefined
       }
     }
   })
 }
 
+const extIndex = {
+  enc: {
+    name: "Encrypted file",
+    extensions: ["enc"]
+  },
+  all: {
+    name: "All Files",
+    extensions: ["*"]
+  }
+}
 
+
+type Optional<O extends object> = {
+  [K in keyof O]?: O[K]
+}
+
+const webFunc: Optional<typeof API> = {
+  
+}
